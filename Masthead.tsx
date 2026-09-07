@@ -1,54 +1,48 @@
 /* Base masthead styles */
 .masthead {
-  background-color: #F9F9FA;
-  color: #313235;
+  background-color: #313235;
+  color: #F9F9FA;
   font-family: "Source Sans 3", sans-serif;
   font-size: 16px;
   line-height: 24px;
-  border-bottom: 1px solid #D1D2D4;
+  border-bottom: 1px solid #55595E;
   padding: 0 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-}
-
-/* Size variations */
-.small {
   height: 48px;
 }
 
-.medium {
-  height: 56px;
-}
-
-.large {
-  height: 64px;
-}
-
 /* Logo styles */
-.logo {
-  color: #7252BC;
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.geLogo {
+  width: 144px;
+  height: 32px;
+  color: #B39CF1;
   font-weight: 600;
   text-decoration: none;
-}
-
-.logo.small {
-  font-size: 18px;
-}
-
-.logo.large {
-  font-size: 20px;
-}
-
-/* Navigation styles */
-.navList {
   display: flex;
-  gap: 24px;
   align-items: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+}
+
+.divider {
+  width: 0;
+  height: 24px;
+  border-right: 1px solid #BABDC0;
+}
+
+.locationText {
+  color: #BABDC0;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  white-space: nowrap;
 }
 
 /* Utility icons container */
@@ -58,121 +52,106 @@
   gap: 8px;
 }
 
-/* Icon button styles */
-.iconButton {
-  width: 32px;
-  height: 32px;
+.settingsIcon {
+  width: 24px;
+  height: 24px;
+  color: #F9F9FA;
+}
+
+.userInfo {
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  cursor: pointer;
-  border: none;
-  background: transparent;
-  color: #313235;
+  gap: 8px;
+  color: #F9F9FA;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.timestampContainer {
+  position: absolute;
+  right: 177px;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: right;
+  color: #F9F9FA;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.date {
+  margin-bottom: 4px;
+}
+
+.time {
+  margin-top: 4px;
 }
 import React from 'react';
 import styles from './Masthead.module.css';
 
 interface MastheadProps {
-  overflowMenu?: boolean;
-  hamburger?: boolean;
-  status?: boolean;
-  notification?: boolean;
-  navigationButtons?: boolean;
-  utilityIcons?: boolean;
-  screenSize?: 'Small' | 'Medium' | 'Large';
   darkMode?: boolean;
+  location?: string;
+  timestamp?: string;
+  date?: string;
+  batteryLevel?: string;
 }
 
 // SVG Icon components based on Figma design system
-const MenuIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M3 12h18M3 6h18M3 18h18"/>
+const SettingsIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <circle cx="12" cy="12" r="3"/>
+    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
   </svg>
 );
 
-const NotificationIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-  </svg>
-);
-
-const StatusIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <circle cx="12" cy="12" r="10"/>
-    <polyline points="12,6 12,12 16,14"/>
+const UserIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+    <circle cx="12" cy="7" r="4"/>
   </svg>
 );
 
 export default function Masthead({
-  overflowMenu = true,
-  hamburger = false,
-  status = false,
-  notification = false,
-  navigationButtons = true,
-  utilityIcons = true,
-  screenSize = 'Large',
-  darkMode = false
+  darkMode = true,
+  location = 'Northwest Ward',
+  timestamp = '01:05',
+  date = '23 Dec 2023',
+  batteryLevel = '100%'
 }: MastheadProps) {
-  const sizeClass = screenSize.toLowerCase() as 'small' | 'medium' | 'large';
-  
   return (
     <header 
-      className={`${styles.masthead} ${styles[sizeClass]}`}
-      data-node-id="1:2161"
+      className={styles.masthead}
+      data-node-id="13:1546"
       role="banner"
       aria-label="Main navigation"
     >
-      <a href="/" className={`${styles.logo} ${styles[`${sizeClass}`]}`} aria-label="Brand home">
-        Brand Logo
-      </a>
+      <div className={styles.logoContainer}>
+        <div className={styles.geLogo}>GE Healthcare</div>
+        <div className={styles.divider}></div>
+        <div className={styles.locationText}>{location}</div>
+      </div>
       
-      {navigationButtons && (
-        <nav aria-label="Main navigation">
-          <ul className={styles.navList}>
-            <li><a href="/home">Home</a></li>
-            <li><a href="/products">Products</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-          </ul>
-        </nav>
-      )}
-      
+      <div className={styles.timestampContainer}>
+        <div className={styles.date}>{date}</div>
+        <div className={styles.time}>{timestamp}</div>
+      </div>
+
       <div className={styles.utilityIcons}>
-        {utilityIcons && (
-          <>
-            {status && (
-              <button 
-                className={styles.iconButton} 
-                aria-label="Status"
-                type="button"
-              >
-                <StatusIcon />
-              </button>
-            )}
-            {notification && (
-              <button 
-                className={styles.iconButton} 
-                aria-label="Notifications"
-                type="button"
-              >
-                <NotificationIcon />
-              </button>
-            )}
-          </>
-        )}
+        <button 
+          className={styles.settingsIcon} 
+          aria-label="Settings"
+          type="button"
+        >
+          <SettingsIcon />
+        </button>
         
-        {overflowMenu && (
-          <button 
-            className={styles.iconButton} 
-            aria-label="Menu"
-            type="button"
-          >
-            <MenuIcon />
-          </button>
-        )}
+        <div className={styles.userInfo}>
+          <UserIcon />
+          <span>{batteryLevel}</span>
+        </div>
       </div>
     </header>
   );
