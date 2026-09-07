@@ -1,0 +1,77 @@
+.masthead {
+  --background-color: #F9F9FA;
+  --text-color: #313235;
+  --brand-color: #7252BC;
+  --border-color: #D1D2D4;
+  --font-family: "Source Sans 3", sans-serif;
+  
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--font-family);
+  font-size: 16px;
+  line-height: 24px;
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.masthead.large {
+  height: 64px;
+}
+
+.masthead.medium {
+  height: 56px;
+}
+
+.masthead.small {
+  height: 48px;
+}
+
+.logo {
+  color: var(--brand-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.logo.large {
+  font-size: 20px;
+}
+
+.logo:not(.large) {
+  font-size: 18px;
+}
+
+.navList {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.iconButton {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--text-color);
+}
+
+.iconButton:hover {
+  background-color: rgba(49, 50, 53, 0.1);
+}
+
+.utilityIcons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

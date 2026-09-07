@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masthead Component Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Design system variables from Figma */
+        :root {
+            --background-color: #F9F9FA;
+            --text-color: #313235;
+            --brand-color: #7252BC;
+            --border-color: #D1D2D4;
+            --font-family: "Source Sans 3", sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-family);
+            background-color: #ffffff;
+        }
+
+        .masthead {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            font-size: 16px;
+            line-height: 24px;
+            border-bottom: 1px solid var(--border-color);
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-sizing: border-box;
+            height: 64px;
+        }
+
+        .logo {
+            color: var(--brand-color);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        .nav-list {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-list a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .nav-list a:hover {
+            color: var(--brand-color);
+        }
+
+        .utility-icons {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .icon-button {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: var(--text-color);
+            transition: background-color 0.2s ease;
+        }
+
+        .icon-button:hover {
+            background-color: rgba(49, 50, 53, 0.1);
+        }
+
+        .content {
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: var(--text-color);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Masthead as specified in Figma design -->
+    <header class="masthead" data-node-id="1:2161" role="banner" aria-label="Main navigation">
+        <a href="#" class="logo" aria-label="Brand home">Brand Logo</a>
+        
+        <nav aria-label="Main navigation">
+            <ul class="nav-list">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        
+        <div class="utility-icons">
+            <button class="icon-button" aria-label="Menu" type="button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12h18M3 6h18M3 18h18"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="content">
+        <h1>Masthead Component Demo</h1>
+        <p>This is a live preview of your Figma Masthead component (Node ID: 1:2161)!</p>
+        <p>The component has been converted from your Figma design with the following specifications:</p>
+        <ul>
+            <li><strong>Background color:</strong> #F9F9FA</li>
+            <li><strong>Text color:</strong> #313235</li>
+            <li><strong>Brand color:</strong> #7252BC</li>
+            <li><strong>Border color:</strong> #D1D2D4</li>
+            <li><strong>Font:</strong> Source Sans 3, 16px, line-height 24px</li>
+            <li><strong>Height:</strong> 64px (Large size)</li>
+        </ul>
+        <p>You can interact with the navigation links and menu button above.</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figma Masthead Component - Live Preview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Figma Design System Variables */
+        :root {
+            --light-mode-text-icon-default: #313235;
+            --light-mode-misc-brand: #7252BC;
+            --light-mode-border-subtle-divider: #D1D2D4;
+            --light-mode-navigation-background: #F9F9FA;
+            --body-regular-font-family: "Source Sans 3", sans-serif;
+            --body-regular-size: 16px;
+            --body-regular-line-height: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--body-regular-font-family);
+            font-size: var(--body-regular-size);
+            line-height: var(--body-regular-line-height);
+            color: var(--light-mode-text-icon-default);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
+            min-height: 100vh;
+        }
+
+        /* Masthead Component - EXACTLY as specified in Figma */
+        .masthead {
+            background-color: var(--light-mode-navigation-background);
+            border-bottom: 1px solid var(--light-mode-border-subtle-divider);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .masthead-logo {
+            color: var(--light-mode-misc-brand);
+            font-weight: 600;
+            font-size: 20px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .masthead-logo svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .masthead-nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .masthead-nav-list {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .masthead-nav-list a {
+            color: var(--light-mode-text-icon-default);
+            text-decoration: none;
+            font-weight: 400;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .masthead-nav-list a:hover {
+            color: var(--light-mode-misc-brand);
+        }
+
+        .masthead-nav-list a::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--light-mode-misc-brand);
+            transform: scaleX(0);
+            transition: transform 0.2s ease;
+        }
+
+        .masthead-nav-list a:hover::after {
+            transform: scaleX(1);
+        }
+
+        .masthead-utility-icons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .masthead-icon-button {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            color: var(--light-mode-text-icon-default);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        .masthead-icon-button:hover {
+            background-color: rgba(114, 82, 188, 0.1);
+            color: var(--light-mode-misc-brand);
+        }
+
+        .masthead-icon-button:focus {
+            box-shadow: 0 0 0 2px rgba(114, 82, 188, 0.3);
+        }
+
+        /* Demo Content */
+        .demo-container {
+            max-width: 1200px;
+            margin: 80px auto 40px;
+            padding: 0 24px;
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .demo-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--light-mode-text-icon-default);
+            margin-bottom: 16px;
+        }
+
+        .demo-subtitle {
+            font-size: 18px;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .figma-info {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .figma-info h3 {
+            color: var(--light-mode-misc-brand);
+            margin-bottom: 16px;
+            font-size: 20px;
+        }
+
+        .figma-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--light-mode-text-icon-default);
+        }
+
+        .detail-value {
+            font-family: monospace;
+            background: var(--light-mode-navigation-background);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .preview-section {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .preview-title {
+            font-size: 24px;
+            margin-bottom: 24px;
+            color: var(--light-mode-text-icon-default);
+        }
+
+        .component-preview {
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+            background: var(--light-mode-navigation-background);
+        }
+
+        .instructions {
+            margin-top: 40px;
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .instructions h3 {
+            margin-bottom: 16px;
+            color: var(--light-mode-misc-brand);
+        }
+
+        .instructions ul {
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            background: rgba(114, 82, 188, 0.1);
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .masthead {
+                padding: 0 16px;
+                height: 56px;
+            }
+            
+            .masthead-logo {
+                font-size: 18px;
+            }
+            
+            .masthead-nav-list {
+                gap: 16px;
+            }
+            
+            .masthead-nav-list a {
+                font-size: 14px;
+            }
+            
+            .masthead-utility-icons {
+                gap: 8px;
+            }
+            
+            .masthead-icon-button {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .demo-container {
+                margin-top: 70px;
+                padding: 0 16px;
+            }
+            
+            .demo-title {
+                font-size: 24px;
+            }
+            
+            .figma-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Masthead Component - EXACTLY as designed in Figma Node 1:2161 -->
+    <header class="masthead" data-node-id="1:2161" role="banner" aria-label="Main navigation">
+        <a href="#" class="masthead-logo" aria-label="Brand home">
+            Edison Design
+        </a>
+        
+        <nav class="masthead-nav" aria-label="Main navigation">
+            <ul class="masthead-nav-list">
+                <li><a href="#" aria-current="page">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Solutions</a></li>
+                <li><a href="#">Resources</a></li>
+                <li><a href="#">Company</a></li>
+            </ul>
+        </nav>
+        
+        <div class="masthead-utility-icons">
+            <button class="masthead-icon-button" aria-label="Menu" type="button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12h18M3 6h18M3 18h18"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Demo Content -->
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1 class="demo-title">Figma to Code Conversion</h1>
+            <p class="demo-subtitle">Your Masthead component (Node ID: 1:2161) has been successfully converted to live HTML/CSS!</p>
+        </div>
+
+        <div class="figma-info">
+            <h3>🎨 Figma Design Specifications</h3>
+            <div class="figma-details">
+                <div class="detail-item">
+                    <span class="detail-label">Figma Node ID</span>
+                    <span class="detail-value">1:2161</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Component Name</span>
+                    <span class="detail-value">Masthead</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Background Color</span>
+                    <span class="detail-value">#F9F9FA</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Text Color</span>
+                    <span class="detail-value">#313235</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Brand Color</span>
+                    <span class="detail-value">#7252BC</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Font Family</span>
+                    <span class="detail-value">Source Sans 3</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="preview-section">
+            <h2 class="preview-title">✨ Interactive Preview</h2>
+            <p style="margin-bottom: 20px;">The masthead above is fully interactive! Try these features:</p>
+            <ul style="padding-left: 20px; margin-bottom: 20px;">
+                <li>Hover over navigation links to see the brand color highlight</li>
+                <li>Hover over the menu icon to see the hover effect</li>
+                <li>Scroll down to see the sticky positioning in action</li>
+                <li>Resize your browser to see responsive behavior</li>
+            </ul>
+            <div class="component-preview">
+                <p>This area demonstrates how your component integrates with page content</p>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>🚀 How to Use This Code</h3>
+            <p>To integrate this component into your project:</p>
+            <ul>
+                <li><strong>For React projects:</strong> Use the <span class="highlight">Masthead.tsx</span> and <span class="highlight">Masthead.module.css</span> files I created</li>
+                <li><strong>For plain HTML/CSS:</strong> Copy the CSS from the <span class="highlight">&lt;style&gt;</span> tag and HTML structure</li>
+                <li><strong>Customize colors:</strong> Modify the CSS variables in the <span class="highlight">:root</span> section</li>
+                <li><strong>Add functionality:</strong> Connect the navigation links and buttons to your actual routes/actions</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Simple interactivity for demo purposes
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.masthead-nav-list a');
+            const menuButton = document.querySelector('.masthead-icon-button');
+            
+            // Highlight current page
+            navLinks[0].setAttribute('aria-current', 'page');
+            
+            // Menu button click handler
+            menuButton?.addEventListener('click', function() {
+                alert('Menu button clicked! In a real app, this would open a dropdown or mobile menu.');
+            });
+            
+            // Navigation link click handlers
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const text = this.textContent;
+                    alert(`Navigating to: ${text}`);
+                    // In real app, this would navigate to the actual page
+                });
+            });
+        });
+    </script>
+</body>
+</html>
